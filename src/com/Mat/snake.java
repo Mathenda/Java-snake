@@ -1,7 +1,4 @@
-package com.Mat;
 
-public class snake {
-}
 package com.Mat;
 
         import javax.swing.*;
