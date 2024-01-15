@@ -39,8 +39,9 @@ public class Board extends JPanel implements ActionListener {
         initBoard();
     }
 
+    //initialize game board
     public void initBoard(){
-        addKeyListener(new TAdapter());
+        addKeyListener(new TAdapter()); //adds key listener
         setBackground(Color.black);
         setFocusable(true);
 
@@ -94,6 +95,7 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
+    //update position by copying the coordinates of the previous dot to the current dot
     private void move(){
         for(int z = dots; z > 0; z--){
             x[z] = x[(z-1)];
@@ -141,22 +143,22 @@ public class Board extends JPanel implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
+        super.paintComponent(g);    //paints the background
         doDrawing(g);
     }
 
     private void doDrawing(Graphics g){
-        if (inGame){
-            g.drawImage(apple, apple_x, apple_y, this);
-            for(int z = 0; z < dots; z++){
-                if(z==0){
+        if (inGame){          //draw in game components if ingame
+            g.drawImage(apple, apple_x, apple_y, this); //draw apple on screen with given coordinates
+            for(int z = 0; z < dots; z++){  //draw head and body on screen
+                if(z==0){       //if first dot
                     g.drawImage(head, x[z], y[z], this);
                 }else{
                     g.drawImage(ball, x[z], y[z], this);
                 }
             }
-            Toolkit.getDefaultToolkit().sync();
-        }else{
+            Toolkit.getDefaultToolkit().sync(); //synchronisez the graphics state of the applications with the display device to ensure the drawing is compleete
+        }else{  //draw gameover if not inGame
             gameOver(g);
         }
     }
@@ -177,30 +179,37 @@ public class Board extends JPanel implements ActionListener {
             move();
         }
 
-        repaint();
+        repaint();  //redraw gameboard to screen
     }
 
+    //handle key events in a java swing application
     private class TAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e){
             int key = e.getKeyCode();
 
+            //if left was pressed and snake is not moving right
             if ((key == KeyEvent.VK_LEFT) && (!rightDirection)){
                 leftDirection = true;
                 upDirection = false;
                 downDirection = false;
             }
 
+            //if right was pressed and snake is not moving left
             if((key == KeyEvent.VK_RIGHT) && (!leftDirection)){
                 rightDirection = true;
                 upDirection = false;
                 downDirection = false;
             }
+
+            //if up was pressed and snake is not moving down
             if((key == KeyEvent.VK_UP) && (!downDirection)){
                 upDirection = true;
                 rightDirection = false;
                 leftDirection = false;
             }
+
+            //if down was pressed and snake is not moving up
             if((key == KeyEvent.VK_DOWN) && (!upDirection)){
                 downDirection = true;
                 rightDirection = false;
