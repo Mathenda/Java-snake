@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 public class Main extends JPanel implements ActionListener {
     private final int B_WIDTH = 300;    //width of the board
     private final int B_HEIGHT = 300;   //height of the board
-    private final int DOT_SIZE = 20;    //size of apple and dot of the snake
+    private final int DOT_SIZE = 10;    //size of apple and dot of the snake
     private final int ALL_DOTS = 900;   //maximum number of possible dots on the board
     private final int RAND_POS = 29;    //calculate random position for apple
     private final int DELAY = 140;  //determine the speed of the game
