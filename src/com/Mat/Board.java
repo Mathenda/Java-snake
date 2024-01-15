@@ -9,13 +9,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Main extends JPanel implements ActionListener {
+public class Board extends JPanel implements ActionListener {
     private final int B_WIDTH = 300;    //width of the board
     private final int B_HEIGHT = 300;   //height of the board
     private final int DOT_SIZE = 10;    //size of apple and dot of the snake
     private final int ALL_DOTS = 900;   //maximum number of possible dots on the board
-    private final int RAND_POS = 29;    //calculate random position for apple
-    private final int DELAY = 140;  //determine the speed of the game
 
     private final int[] x = new int[ALL_DOTS];  //store x coordinates of all joints of a snake
     private final int[] y = new int[ALL_DOTS];  //store y coordinates of all joints of a snake
@@ -37,7 +35,7 @@ public class Main extends JPanel implements ActionListener {
     private Image head;
     private Image apple;
 
-    public Main(){
+    public Board(){
         initBoard();
     }
 
@@ -65,6 +63,8 @@ public class Main extends JPanel implements ActionListener {
     }
 // randomly place apple on map
     private void locateApple(){
+        //calculate random position for apple
+        int RAND_POS = 29;
         int r = (int) (Math.random() * RAND_POS);
         apple_x = ((r*DOT_SIZE));
 
@@ -80,6 +80,8 @@ public class Main extends JPanel implements ActionListener {
             y[z] = 50;
         }
         locateApple();
+        //determine the speed of the game
+        int DELAY = 140;
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -115,8 +117,9 @@ public class Main extends JPanel implements ActionListener {
     //check if the snake has hit itself or the walls
     private void checkCollision(){
         for(int z = dots; z > 0; z--){
-            if((z >4) && (x[0] == x[z]) && (y[0] == y[z])) {
+            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
                 inGame = false;
+                break;
             }
         }
         if(y[0] >= B_HEIGHT){
