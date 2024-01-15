@@ -2,3 +2,29 @@ package com.Mat;
 
 public class snake {
 }
+package com.Mat;
+
+        import javax.swing.*;
+        import java.awt.*;
+
+public class snake extends JFrame {
+    public snake(){
+        initUI();
+    }
+
+    private void initUI(){
+        add(new Board());
+        setResizable(false);
+        pack();
+        setTitle("Snake");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public static void main(String[] args){
+        EventQueue.invokeLater(()->{
+            JFrame ex = new snake();
+            ex.setVisible(true);
+        });
+    }
+}
